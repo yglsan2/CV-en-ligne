@@ -80,3 +80,69 @@ h3 {
     width: 100px; /* Ajuste la taille du QR Code */
     margin-bottom: 20px;
 }
+
+#email {
+font-size : 0.85em
+
+}
+
+/* media queries d'impression*/ 
+
+@media print {
+/*le titre ne doit pas être coupé et doit toujours être au début, media query qui ne marche pas ici, mais qui est utile de connaître */
+  /* h1{ page-break-before:always; }  */
+    
+   /*config body*/ 
+
+   body{ html{ font-size: 7.5pt; 
+}
+   body{ font-size: 12pt; 
+}
+            } 
+
+    p{
+    orphans: 3;
+    widows: 3;
+            }
+/*éviter les coupures de pages */
+blockquote, ul, ol{
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+/* pas de coupure de page après ces éléments */
+h1, h2, h3, h4, h5, h6, caption{
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* options activables  (permettent d'ajouter des éléments à imprimer et à ne pas imprimer, 
+!important permet de rendre l'opération prioritaire, pour éviter que la commande soit invisible*/
+@media print{
+    .print{ 
+        display: none !important;
+
+    .noprint{ display: none !important; }
+}
+@media not print{
+    .printonly{ display: none !important; }
+}
+
+
+
+
+/* Options d'impression :  <div class="noprint"> visible tout le temps, sauf à l'impression.</div>
+<div class="printonly"> visible qu'à l'impression.</div>*/
+
+
+/* supprimer les éventuelles préconfigurations des navigateurs qui suppriment des actions d'impression par défaut*/ 
+*{
+   
+   text-shadow: none !important;
+}
+
+/*améliorer les contrastes d'impression, notamment pour les couleurs ou les éventuelles photos*/ 
+      img{
+        filter: contrast(150%) brightness(120%)
+      }
+
+}
