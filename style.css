@@ -1,148 +1,203 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /*police*/
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+/* =========================
+   CV — Benjamin Moine (CSS complet)
+   ========================= */
+
+/* -------- Base écran -------- */
+:root{
+  --left-bg:#2c3e50;
+  --left-fg:#ffffff;
+  --right-bg:#ecf0f1;
+  --text:#1f2937;
+  --accent:#f1c40f;
+  --muted:#a7a793;
+  --border:#bdc3c7;
 }
 
-.container {
-    display: flex;
-    max-width: 1200px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+*{ box-sizing:border-box; }
+
+html, body{
+  margin:0;
+  padding:0;
+  background-color:#f4f4f4;
+  color:var(--text);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height:1.5;
 }
 
-.left {
-    background-color: #2c3e50;
-    color: white;
-    width: 30%;
-    padding: 20px;
-    box-sizing: border-box;
+/* -------- Mise en page -------- */
+.container{
+  display:flex;
+  max-width:1200px;
+  margin:20px auto;
+  background:#fff; /* évite la bande grise à l’impression */
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.right {
-    background-color: #ecf0f1;
-    width: 70%;
-    padding: 20px;
-    box-sizing: border-box;
+.left{
+  background-color:var(--left-bg);
+  color:var(--left-fg);
+  width:30%;
+  padding:20px;
 }
 
-h1 {
-    margin-top: 0;
-    font-weight: normal;
-    font-size: 24px;
-    color: #f1c40f;
+.right{
+  background-color:var(--right-bg);
+  width:70%;
+  padding:20px;
 }
 
-h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
+/* -------- Titres / texte -------- */
+h1{
+  margin-top:0;
+  font-weight:600;
+  font-size:24px;
+  color:var(--accent);
 }
 
-.section {
-    margin-bottom: 20px;
+h2{
+  font-size:22px;
+  margin:0 0 10px;
 }
 
-.section-title {
-    color: #a7a793; /* Couleur douce pour les titres de section */
-    font-size: 20px; /* Taille augmentée */
-    margin-top: 20px; /* Marge pour l'espacement */
-    border-bottom: 1px solid #bdc3c7; /* Bordure inférieure pour séparer */
-    padding-bottom: 5px; /* Espacement entre le titre et le contenu */
+h3{
+  color:var(--muted);
+  font-size:18px;
+  margin-top:15px;
+  font-weight:bold;
 }
 
-h3 {
-    color: #a7a793; /* couleur appropriée pour mise en relief et harmonisation*/
-    font-size: 18px; /* Taille de police */
-    margin-top: 15px; /* Espacement avant le titre */
-    font-weight: bold; /* Mettre le texte en gras */
+.section{ margin-bottom:20px; }
+
+.section-title{
+  color:var(--muted);
+  font-size:20px;
+  margin-top:20px;
+  border-bottom:1px solid var(--border);
+  padding-bottom:5px;
 }
 
+.left p, .right p{ margin:5px 0; }
 
-.left p, .right p {
-    margin: 5px 0;
+.right .section{
+  border-bottom:1px solid var(--border);
+  padding-bottom:15px;
 }
 
-.right .section {
-    border-bottom: 1px solid #bdc3c7;
-    padding-bottom: 15px;
+/* -------- Contact -------- */
+.contact-info{ margin-bottom:20px; }
+
+.contact-info p{ margin:5px 0; }
+
+.contact-info a{
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
+}
+.contact-info a:hover,
+.contact-info a:focus{ text-decoration:underline; }
+
+.qrcode{
+  width:100px;
+  margin-bottom:20px;
 }
 
-.contact-info {
-    margin-bottom: 20px;
+#email{ font-size:.85em; }
+
+/* -------- Accessibilité mineure -------- */
+a, button{ outline-color:var(--accent); }
+
+/* -------- Responsive -------- */
+@media (max-width: 900px){
+  .container{ flex-direction:column; }
+  .left, .right{ width:100%; }
+  .left{ padding:18px; }
+  .right{ padding:18px; }
+  h1{ font-size:22px; }
 }
 
-.contact-info p {
-    margin: 5px 0;
+@media (max-width: 520px){
+  html{ font-size:15px; }     /* texte un poil plus grand */
+  .qrcode{ width:84px; }
 }
 
-.qrcode {
-    width: 100px; /* Ajuste la taille du QR Code */
-    margin-bottom: 20px;
+/* -------- Impression --------
+   Objectifs :
+   - A4 portrait
+   - Deux moitiés HORIZONTALES : .left en haut, .right en bas
+   - Limiter les coupures
+-------------------------------- */
+@page{
+  size:A4 portrait;
+  margin:12mm;
 }
 
-#email {
-font-size : 0.85em
-
-}
-
-/* media queries d'impression*/ 
-
-@media print {
-/*le titre ne doit pas être coupé et doit toujours être au début, media query qui ne marche pas ici, mais qui est utile de connaître */
-  /* h1{ page-break-before:always; }  */
-    
-   /*config body*/ 
-
-   body{ html{ font-size: 7.5pt; 
-}
-   body{ font-size: 12pt; 
-}
-            } 
-
-    p{
-    orphans: 3;
-    widows: 3;
-            }
-/*éviter les coupures de pages */
-blockquote, ul, ol{
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-/* pas de coupure de page après ces éléments */
-h1, h2, h3, h4, h5, h6, caption{
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
-/* options activables  (permettent d'ajouter des éléments à imprimer et à ne pas imprimer, 
-!important permet de rendre l'opération prioritaire, pour éviter que la commande soit invisible*/
 @media print{
-    .print{ 
-        display: none !important;
 
-    .noprint{ display: none !important; }
+  /* Base propre à l’impression */
+  html, body{
+    background:#fff !important;
+    color:#000;
+    font-size:12pt;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  *{
+    text-shadow:none !important;
+    box-shadow:none !important;
+  }
+
+  /* Empile les colonnes verticalement (haut/bas) */
+  .container{
+    display:flex;
+    flex-direction:column;
+    max-width:100%;
+    margin:0;
+    page-break-inside:avoid;
+  }
+
+  /* Chaque moitié ≈ 50% de la page */
+  .left, .right{
+    width:100% !important;
+    padding:10mm 8mm;
+    page-break-inside:avoid;
+    background:transparent; /* option : épargne l’encre tout en gardant la mise en forme */
+  }
+
+  .left{
+    min-height:48vh;                /* moitié haute */
+    border-bottom:1px solid #999;   /* repère de coupe discret */
+  }
+
+  .right{
+    min-height:48vh;                /* moitié basse */
+    border-bottom:0;
+  }
+
+  /* Hiérarchie titres à l’impression */
+  h1{ font-size:18pt; }
+  h2{ font-size:14pt; }
+  h3{ font-size:12pt; color:#666; }
+
+  /* Orphelines/veuves & anti-coupures */
+  p, li{ orphans:3; widows:3; }
+  blockquote, ul, ol, table{ page-break-inside:avoid; break-inside:avoid; }
+  h1, h2, h3, h4, h5, h6, caption{ page-break-after:avoid; break-after:avoid; }
+
+  /* Utilitaires d’affichage */
+  .noprint{ display:none !important; }
+  .printonly{ display:block !important; }
+
+  /* Alléger la colonne droite visuellement */
+  .right .section{ border-bottom:0; padding-bottom:8px; }
+
+  /* Images un peu plus contrastées si nécessaire */
+  img{ filter:contrast(120%) brightness(110%); }
 }
+
+/* -------- Écran uniquement -------- */
 @media not print{
-    .printonly{ display: none !important; }
+  .printonly{ display:none !important; }
 }
 
 
-
-
-/* Options d'impression :  <div class="noprint"> visible tout le temps, sauf à l'impression.</div>
-<div class="printonly"> visible qu'à l'impression.</div>*/
-
-
-/* supprimer les éventuelles préconfigurations des navigateurs qui suppriment des actions d'impression par défaut*/ 
-*{
-   
-   text-shadow: none !important;
-}
-
-/*améliorer les contrastes d'impression, notamment pour les couleurs ou les éventuelles photos*/ 
-      img{
-        filter: contrast(150%) brightness(120%)
-      }
-
-}
